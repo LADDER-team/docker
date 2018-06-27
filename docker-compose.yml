@@ -1,0 +1,14 @@
+version: '2'
+services:
+  front:
+    build:
+      context: front-end
+      args:
+        GIT_REF: feature/DAY28-0001
+    ports:
+     - "8000:8000"
+  back:
+    build:
+      context: back-end
+      args:
+        GIT_REF: feature/DAY28-0001
