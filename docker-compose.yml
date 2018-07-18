@@ -8,8 +8,8 @@ services:
     expose:
       - 80
     environment:
-      - VIRTUAL_HOST=ladder.noframeschool.com
-      - LETSENCRYPT_HOST=ladder.noframeschool.com
+      - VIRTUAL_HOST=ladder.noframeschools.com
+      - LETSENCRYPT_HOST=ladder.noframeschools.com
       - LETSENCRYPT_EMAIL=takatomgoo@gmail.com
 
   api:
@@ -19,10 +19,10 @@ services:
     expose:
       - 80
     environment:
-      - VIRTUAL_HOST=api.ladder.noframeschool.com
-      - LETSENCRYPT_HOST=api.ladder.noframeschool.com
+      - VIRTUAL_HOST=api.ladder.noframeschools.com
+      - LETSENCRYPT_HOST=api.ladder.noframeschools.com
       - LETSENCRYPT_EMAIL=takatomgoo@gmail.com
-      - DJANGO_SETTINGS_MODULE=projectl.settings.production
+      - DJANGO_SETTINGS_MODULE=project.settings.production
       - SECRET_KEY
       - DB_USER
       - DB_PASS
