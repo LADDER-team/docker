@@ -15,8 +15,14 @@ RUN git clone -b ${GIT_REF} https://github.com/LADDER-team/ladder-api-server.git
                 djangorestframework-jwt \
                 django-cors-headers \
                 psycopg2 \
-                Pillow
+                Pillow \
+                uwsgi && \
+    apt-get update && \
+    apt-get install nginx
 
-COPY run.sh /root/ladder/run.sh
+COPY run.sh /root/ladder/
+COPY wsgi.ini /root/ladder/
+COPY uwsgi_params /root/ladder/
+COPY ladder-nginx.conf /etc/nginx/sites-enabled/
 
-ENTRYPOINT ["bash", "/root/ladder/run.sh"]
+CMD ["bash", "/root/ladder/run.sh"]
