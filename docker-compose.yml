@@ -1,14 +1,54 @@
 version: '2'
 services:
-  front:
-    build:
-      context: front-end
-      args:
-        GIT_REF: feature/DAY28-0001
+
+  web:
+    image: takatom/ladder-front:latest
+    depends_on:
+      - api
+    expose:
+      - 80
+    environment:
+      - VIRTUAL_HOST: ladder.noframeschool.com
+      - LETSENCRYPT_HOST: ladder.noframeschool.com
+
+  api:
+    image: takatom/ladder-back:latest
+    depends_on:
+     -db
+    expose:
+      - 80
+    environment:
+      - VIRTUAL_HOST: api.ladder.noframeschool.com
+      - LETSENCRYPT_HOST: api.ladder.noframeschool.com
+      - DJANGO_SETTINGS_MODULE: projectl.settings.production
+      - SECRET_KEY
+      - DB_USER
+      - DB_PASS
+      - DB_HOST: db
+      - DB_PORT: 5432
+
+  db:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD
+      - POSTGRES_USER
+      - POSTGRES_DB: ladder
+
+  nginx-proxy:
+    image: jwilder/nginx-proxy
     ports:
-     - "8000:8000"
-  back:
-    build:
-      context: back-end
-      args:
-        GIT_REF: feature/DAY28-0001
+      - 443:443
+    volumes:
+      - /etc/nginx/certs
+      - /etc/nginx/vhost.d
+      - /usr/share/nginx/html
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+    labels:
+      - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy
+
+  letsencrypt-nginx-proxy-companion:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+    volumes_from:
+      - nginx-proxy
