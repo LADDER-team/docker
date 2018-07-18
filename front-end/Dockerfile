@@ -1,7 +1,7 @@
 FROM node:10.5.0 as builder
 WORKDIR /root/ladder
 ARG GIT_REF=master
-EXPOSE 8080
+EXPOSE 80
 RUN git clone -b ${GIT_REF} "https://github.com/LADDER-team/ladder-web-server.git" /root/ladder && \
     npm install && \
     npm run build
