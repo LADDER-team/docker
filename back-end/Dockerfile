@@ -18,7 +18,7 @@ RUN git clone -b ${GIT_REF} https://github.com/LADDER-team/ladder-api-server.git
                 Pillow \
                 uwsgi && \
     apt-get update && \
-    apt-get install nginx
+    apt-get install -y nginx
 
 COPY run.sh /root/ladder/
 COPY wsgi.ini /root/ladder/
