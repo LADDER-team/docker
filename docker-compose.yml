@@ -10,6 +10,7 @@ services:
     environment:
       - VIRTUAL_HOST=ladder.noframeschool.com
       - LETSENCRYPT_HOST=ladder.noframeschool.com
+      - LETSENCRYPT_EMAIL=takatomgoo@gmail.com
 
   api:
     image: takatom/ladder-back:latest
@@ -20,6 +21,7 @@ services:
     environment:
       - VIRTUAL_HOST=api.ladder.noframeschool.com
       - LETSENCRYPT_HOST=api.ladder.noframeschool.com
+      - LETSENCRYPT_EMAIL=takatomgoo@gmail.com
       - DJANGO_SETTINGS_MODULE=projectl.settings.production
       - SECRET_KEY
       - DB_USER
