@@ -2,7 +2,7 @@ FROM python:3.6.4
 
 WORKDIR /root/ladder
 
-EXPOSE 8000
+EXPOSE 80
 
 ARG GIT_REF=master
 
